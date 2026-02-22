@@ -19,6 +19,9 @@ env:
   GEMINI_API_KEY: ${{ secrets.CICD_GEMINI_API_KEY_OPEN_RUNTIME }}
 
 jobs:
+  # ============================================================================
+  # Gate: Verify CI passed AND commit is not from release bot
+  # ============================================================================
   pre-check:
     runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
@@ -44,6 +47,9 @@ jobs:
             echo "should_release=true" >> "$GITHUB_OUTPUT"
           fi
 
+  # ============================================================================
+  # Job 1: Determine Version
+  # ============================================================================
   determine-version:
     needs: pre-check
     if: needs.pre-check.outputs.should_release == 'true'
@@ -58,14 +64,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Configure Git for HTTPS with Token
-        shell: bash
-        run: |
-          TOKEN="${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PIECES_APP_SSH_KEY }}
+
+      - name: Skip LFS for dependency clones
+        run: git lfs install --skip-smudge
 
       - uses: dart-lang/setup-dart@v1.7.1
         with:
@@ -117,6 +121,9 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
+  # ============================================================================
+  # Job 2: Pre-Release Triage
+  # ============================================================================
   pre-release-triage:
     needs: determine-version
     if: needs.determine-version.outputs.should_release == 'true'
@@ -127,14 +134,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Configure Git for HTTPS with Token
-        shell: bash
-        run: |
-          TOKEN="${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PIECES_APP_SSH_KEY }}
+
+      - name: Skip LFS for dependency clones
+        run: git lfs install --skip-smudge
 
       - uses: dart-lang/setup-dart@v1.7.1
         with:
@@ -171,6 +176,7 @@ jobs:
             --prev-tag "${{ needs.determine-version.outputs.prev_tag }}" \
             --version "${{ needs.determine-version.outputs.new_version }}"
 
+          # Find manifest from .cicd_runs/ audit trail
           MANIFEST=$(find .cicd_runs -name "issue_manifest.json" -type f 2>/dev/null | sort -r | head -1)
           if [ -n "$MANIFEST" ]; then
             cp "$MANIFEST" /tmp/issue_manifest.json
@@ -192,6 +198,9 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
+  # ============================================================================
+  # Job 3: Stage 1 -- Explorer Agent
+  # ============================================================================
   explore-changes:
     needs: [determine-version, pre-release-triage]
     if: needs.determine-version.outputs.should_release == 'true'
@@ -202,14 +211,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Configure Git for HTTPS with Token
-        shell: bash
-        run: |
-          TOKEN="${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PIECES_APP_SSH_KEY }}
+
+      - name: Skip LFS for dependency clones
+        run: git lfs install --skip-smudge
 
       - uses: dart-lang/setup-dart@v1.7.1
         with:
@@ -275,6 +282,9 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
+  # ============================================================================
+  # Job 4: Stage 2 -- Composer Agent + Documentation
+  # ============================================================================
   compose-artifacts:
     needs: [determine-version, explore-changes]
     if: needs.determine-version.outputs.should_release == 'true'
@@ -285,14 +295,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Configure Git for HTTPS with Token
-        shell: bash
-        run: |
-          TOKEN="${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PIECES_APP_SSH_KEY }}
+
+      - name: Skip LFS for dependency clones
+        run: git lfs install --skip-smudge
 
       - uses: dart-lang/setup-dart@v1.7.1
         with:
@@ -375,6 +383,9 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
+  # ============================================================================
+  # Job 5: Stage 3 -- Release Notes Author
+  # ============================================================================
   release-notes:
     needs: [determine-version, explore-changes, pre-release-triage, compose-artifacts]
     if: needs.determine-version.outputs.should_release == 'true'
@@ -385,14 +396,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Configure Git for HTTPS with Token
-        shell: bash
-        run: |
-          TOKEN="${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PIECES_APP_SSH_KEY }}
+
+      - name: Skip LFS for dependency clones
+        run: git lfs install --skip-smudge
 
       - uses: dart-lang/setup-dart@v1.7.1
         with:
@@ -420,6 +429,7 @@ jobs:
           key: ${{ runner.os }}-go-mcp-v1
           restore-keys: ${{ runner.os }}-go-mcp-
 
+      # Download ALL previous stage artifacts for context
       - uses: actions/download-artifact@v7.0.0
         continue-on-error: true
         with:
@@ -444,6 +454,7 @@ jobs:
           name: version-bump-rationale
           path: ./version_bumps/
 
+      # Copy CHANGELOG from compose stage so release notes can reference it
       - name: Apply compose artifacts
         run: |
           if [ -f ./artifacts/CHANGELOG.md ]; then
@@ -486,6 +497,9 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
+  # ============================================================================
+  # Job 6: Create Release
+  # ============================================================================
   create-release:
     needs: [determine-version, compose-artifacts, release-notes]
     if: needs.determine-version.outputs.should_release == 'true'
@@ -494,17 +508,15 @@ jobs:
       - uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
-          token: ${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN }}
+          ssh-key: ${{ secrets.PIECES_APP_SSH_KEY }}
           persist-credentials: true
 
-      - name: Configure Git for HTTPS with Token
-        shell: bash
-        run: |
-          TOKEN="${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN }}"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PIECES_APP_SSH_KEY }}
+
+      - name: Skip LFS for dependency clones
+        run: git lfs install --skip-smudge
 
       - uses: dart-lang/setup-dart@v1.7.1
         with:
@@ -582,8 +594,8 @@ jobs:
 
       - name: Create release
         env:
-          GH_TOKEN: ${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           dart run runtime_ci_tooling:manage_cicd create-release \
             --version "${{ needs.determine-version.outputs.new_version }}" \
@@ -591,6 +603,9 @@ jobs:
             --artifacts-dir ./artifacts \
             --repo "${{ github.repository }}"
 
+  # ============================================================================
+  # Job 7: Post-Release Triage
+  # ============================================================================
   post-release-triage:
     needs: [determine-version, create-release]
     if: needs.determine-version.outputs.should_release == 'true'
@@ -601,14 +616,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Configure Git for HTTPS with Token
-        shell: bash
-        run: |
-          TOKEN="${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PIECES_APP_SSH_KEY }}
+
+      - name: Skip LFS for dependency clones
+        run: git lfs install --skip-smudge
 
       - uses: dart-lang/setup-dart@v1.7.1
         with:
