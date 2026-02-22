@@ -1,0 +1,50 @@
+{
+  "version": "6.0.0",
+  "previous_version": "v5.1.11",
+  "total_commits": 1,
+  "categories": {
+    "added": [],
+    "changed": [
+      {
+        "description": "Renamed RSA and digest enum values to lowerCamelCase to satisfy the constant_identifier_names lint rule.",
+        "pr": "",
+        "commits": [
+          "449f220"
+        ]
+      },
+      {
+        "description": "Modernized all part-of directives to use URI syntax and updated the library directive to be unnamed.",
+        "pr": "",
+        "commits": [
+          "449f220"
+        ]
+      },
+      {
+        "description": "Applied use_super_parameters across IV, Key, RSA, and RSASigner classes.",
+        "pr": "",
+        "commits": [
+          "449f220"
+        ]
+      },
+      {
+        "description": "Bumped runtime_ci_tooling dev_dependency to ^0.9.0.",
+        "pr": "",
+        "commits": [
+          "449f220"
+        ]
+      }
+    ],
+    "deprecated": [],
+    "removed": [],
+    "fixed": [
+      {
+        "description": "Fixed 42 analyzer lint issues, including the use of null-aware assignment operators in Fernet and Key.stretch, and escaping angle brackets in doc comments.",
+        "pr": "",
+        "commits": [
+          "449f220"
+        ]
+      }
+    ],
+    "security": []
+  }
+}

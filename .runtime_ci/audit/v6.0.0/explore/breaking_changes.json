@@ -1,0 +1,19 @@
+{
+  "has_breaking_changes": true,
+  "changes": [
+    {
+      "description": "Renamed RSA encoding and digest enum values to lowerCamelCase.",
+      "affected_apis": [
+        "RSAEncoding.PKCS1",
+        "RSAEncoding.OAEP",
+        "RSADigest.SHA1",
+        "RSADigest.SHA256",
+        "RSADigest.SHA512",
+        "RSASignDigest.SHA256",
+        "RSASignDigest.SHA512"
+      ],
+      "migration_guide": "Update all usages of the old upper-cased enum values to the new lower-cased ones. Replace `RSAEncoding.PKCS1` with `RSAEncoding.pkcs1`, `RSAEncoding.OAEP` with `RSAEncoding.oaep`, `RSADigest.SHA1` with `RSADigest.sha1`, `RSADigest.SHA256` with `RSADigest.sha256`, `RSADigest.SHA512` with `RSADigest.sha512`, `RSASignDigest.SHA256` with `RSASignDigest.sha256`, and `RSASignDigest.SHA512` with `RSASignDigest.sha512`.",
+      "pr": ""
+    }
+  ]
+}

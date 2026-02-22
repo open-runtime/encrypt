@@ -1,0 +1,4 @@
+- **Standardized Constants**: RSA encoding and digest enum values now use `lowerCamelCase` for compliance with Dart lint rules.
+- **Modernized Directives**: Updated all `part of` directives to use URI syntax and removed the named library directive.
+- **Codebase Cleanliness**: Resolved 42 analyzer lint issues across the package, enhancing overall reliability and maintainability.
+- **Null-Aware Assignment**: Utilized null-aware assignment operators (`??=`) in the `Fernet` algorithm and `Key.stretch`.

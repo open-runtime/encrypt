@@ -1,5 +1,25 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [6.0.0] - 2026-02-22
+
+### Breaking Changes
+- **BREAKING**: Renamed RSA encoding and digest enum values to lowerCamelCase.
+  - Migration: `RSAEncoding.PKCS1` → `RSAEncoding.pkcs1`, `RSADigest.SHA256` → `RSADigest.sha256`, etc.
+
+### Changed
+- Renamed RSA and digest enum values to lowerCamelCase to satisfy the constant_identifier_names lint rule.
+- Modernized all part-of directives to use URI syntax and updated the library directive to be unnamed.
+- Applied use_super_parameters across IV, Key, RSA, and RSASigner classes.
+- Bumped runtime_ci_tooling dev_dependency to ^0.9.0.
+
+### Fixed
+- Fixed 42 analyzer lint issues, including the use of null-aware assignment operators in Fernet and Key.stretch, and escaping angle brackets in doc comments.
+
 ## [5.1.6](https://github.com/pieces-app/encrypt/compare/v5.1.5...v5.1.6) (2025-11-30)
 
 ### 🚀 Release Highlights
@@ -219,6 +239,7 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 
 - Refresh dependencies, make sure it works on Dart 2
 
+[6.0.0]: https://github.com/open-runtime/encrypt/compare/v5.1.6...v6.0.0
 [5.1.6]: https://github.com/open-runtime/encrypt/compare/v5.1.5...v5.1.6
 [5.1.5]: https://github.com/open-runtime/encrypt/compare/v5.1.5...v5.1.5
 [5.1.5]: https://github.com/open-runtime/encrypt/compare/v5.1.4...v5.1.5
