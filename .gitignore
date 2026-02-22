@@ -6,3 +6,8 @@ build/
 doc/api/
 example/issue_*
 example/local.dart
+pubspec.lock
+
+# CI/CD local run audit trails
+.cicd_runs/
+.runtime_ci/runs/
