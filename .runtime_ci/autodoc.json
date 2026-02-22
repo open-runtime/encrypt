@@ -38,5 +38,10 @@
       "hash": "",
       "last_updated": null
     }
-  ]
+  ],
+  "templates": {
+    "quickstart": "scripts/prompts/autodoc_quickstart_prompt.dart",
+    "api_reference": "scripts/prompts/autodoc_api_reference_prompt.dart",
+    "examples": "scripts/prompts/autodoc_examples_prompt.dart"
+  }
 }

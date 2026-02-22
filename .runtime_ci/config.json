@@ -60,9 +60,10 @@
     ],
     "area": [
       "area/core",
-      "area/ci-cd",
-      "area/docs",
-      "area/algorithms"
+      "area/algorithms",
+      "area/signer",
+      "area/secure-random",
+      "area/docs"
     ]
   },
   "thresholds": {
