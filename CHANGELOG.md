@@ -218,3 +218,12 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 ## 0.2.0+1
 
 - Refresh dependencies, make sure it works on Dart 2
+
+[5.1.6]: https://github.com/open-runtime/encrypt/compare/v5.1.5...v5.1.6
+[5.1.5]: https://github.com/open-runtime/encrypt/compare/v5.1.5...v5.1.5
+[5.1.5]: https://github.com/open-runtime/encrypt/compare/v5.1.4...v5.1.5
+[5.1.4]: https://github.com/open-runtime/encrypt/compare/v5.1.3...v5.1.4
+[5.1.3]: https://github.com/open-runtime/encrypt/compare/v5.1.2...v5.1.3
+[5.1.2]: https://github.com/open-runtime/encrypt/compare/v5.1.1...v5.1.2
+[5.1.1]: https://github.com/open-runtime/encrypt/compare/v5.1.0...v5.1.1
+[5.1.0]: https://github.com/open-runtime/encrypt/releases/tag/v5.1.0
