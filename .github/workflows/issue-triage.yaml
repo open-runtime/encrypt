@@ -44,10 +44,15 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - uses: webfactory/ssh-agent@v0.9.0
+      - name: Configure Git for HTTPS with Token
         if: steps.trigger.outputs.run == 'true'
-        with:
-          ssh-private-key: ${{ secrets.PIECES_APP_SSH_KEY }}
+        shell: bash
+        run: |
+          TOKEN="${{ secrets.TSAVO_AT_PIECES_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
 
       - name: Skip LFS for dependency clones
         if: steps.trigger.outputs.run == 'true'
