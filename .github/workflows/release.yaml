@@ -71,7 +71,7 @@ jobs:
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
           git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
 
       - name: Skip LFS for dependency clones
         run: git lfs install --skip-smudge
@@ -146,7 +146,7 @@ jobs:
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
           git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
 
       - name: Skip LFS for dependency clones
         run: git lfs install --skip-smudge
@@ -228,7 +228,7 @@ jobs:
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
           git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
 
       - name: Skip LFS for dependency clones
         run: git lfs install --skip-smudge
@@ -317,7 +317,7 @@ jobs:
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
           git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
 
       - name: Skip LFS for dependency clones
         run: git lfs install --skip-smudge
@@ -423,7 +423,7 @@ jobs:
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
           git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
 
       - name: Skip LFS for dependency clones
         run: git lfs install --skip-smudge
@@ -543,7 +543,7 @@ jobs:
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
           git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
 
       - name: Skip LFS for dependency clones
         run: git lfs install --skip-smudge
@@ -653,7 +653,7 @@ jobs:
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "git@github.com:"
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "ssh://git@github.com/"
           git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
-          git config --global url."https://x-access-token:${TOKEN}@github.com/pieces-app/".insteadOf "git@github.com:pieces-app/"
+          git config --global url."https://x-access-token:${TOKEN}@github.com/open-runtime/".insteadOf "git@github.com:open-runtime/"
 
       - name: Skip LFS for dependency clones
         run: git lfs install --skip-smudge

@@ -1,7 +1,7 @@
 {
   "repository": {
     "name": "encrypt",
-    "owner": "pieces-app",
+    "owner": "open-runtime",
     "triaged_label": "triaged",
     "changelog_path": "CHANGELOG.md",
     "release_notes_path": ".runtime_ci/release_notes"
