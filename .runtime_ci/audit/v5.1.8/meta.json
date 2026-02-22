@@ -1,0 +1,79 @@
+{
+  "command": "merged-audit",
+  "started_at": "2026-02-22T03:08:26.119169",
+  "merged_from": [
+    {
+      "artifact": "cicd-audit-explore",
+      "command": "explore",
+      "args": [],
+      "started_at": "2026-02-22T03:05:19.323184",
+      "pid": 2626,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-22T03-05-19_2626",
+      "ci": true,
+      "completed_at": "2026-02-22T03:05:24.593011",
+      "duration_seconds": 5,
+      "exit_code": 1,
+      "artifacts": [
+        "explore/prompt.txt",
+        "meta.json"
+      ]
+    },
+    {
+      "artifact": "cicd-audit-release-notes",
+      "command": "release-notes",
+      "args": [],
+      "started_at": "2026-02-22T03:07:54.050986",
+      "pid": 2714,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-22T03-07-54_2714",
+      "ci": true,
+      "completed_at": "2026-02-22T03:08:01.476612",
+      "duration_seconds": 7,
+      "exit_code": 1,
+      "artifacts": [
+        "release-notes/prompt.txt",
+        "meta.json"
+      ]
+    },
+    {
+      "artifact": "cicd-audit-compose",
+      "command": "documentation",
+      "args": [],
+      "started_at": "2026-02-22T03:06:23.570016",
+      "pid": 2783,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-22T03-06-23_2783",
+      "ci": true
+    },
+    {
+      "artifact": "cicd-audit-compose",
+      "command": "compose",
+      "args": [],
+      "started_at": "2026-02-22T03:06:17.847952",
+      "pid": 2656,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-22T03-06-17_2656",
+      "ci": true,
+      "completed_at": "2026-02-22T03:06:23.154488",
+      "duration_seconds": 5,
+      "artifacts": [
+        "compose/prompt.txt",
+        "meta.json"
+      ]
+    }
+  ],
+  "artifact_count": 4,
+  "total_files": 6,
+  "ci": true,
+  "platform": "linux",
+  "dart_version": "3.9.2"
+}
