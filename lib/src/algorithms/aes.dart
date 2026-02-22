@@ -1,4 +1,4 @@
-part of encrypt;
+part of '../../encrypt.dart';
 
 /// Wraps the AES Algorithm.
 class AES implements Algorithm {
@@ -9,9 +9,7 @@ class AES implements Algorithm {
   final StreamCipher? _streamCipher;
 
   AES(this.key, {this.mode = AESMode.sic, this.padding = 'PKCS7'})
-      : _streamCipher = padding == null && _streamable.contains(mode)
-            ? StreamCipher('AES/${_modes[mode]}')
-            : null {
+    : _streamCipher = padding == null && _streamable.contains(mode) ? StreamCipher('AES/${_modes[mode]}') : null {
     if (mode == AESMode.gcm) {
       _cipher = GCMBlockCipher(AESEngine());
     } else {
@@ -91,12 +89,7 @@ class AES implements Algorithm {
     }
 
     if (mode == AESMode.gcm) {
-      return AEADParameters(
-        KeyParameter(key.bytes),
-        128,
-        iv.bytes,
-        associatedData ?? Uint8List.fromList([]),
-      );
+      return AEADParameters(KeyParameter(key.bytes), 128, iv.bytes, associatedData ?? Uint8List.fromList([]));
     }
 
     if (padding != null) {
@@ -111,22 +104,11 @@ class AES implements Algorithm {
       return PaddedBlockCipherParameters(KeyParameter(key.bytes), null);
     }
 
-    return PaddedBlockCipherParameters(
-        ParametersWithIV<KeyParameter>(KeyParameter(key.bytes), iv.bytes),
-        null);
+    return PaddedBlockCipherParameters(ParametersWithIV<KeyParameter>(KeyParameter(key.bytes), iv.bytes), null);
   }
 }
 
-enum AESMode {
-  cbc,
-  cfb64,
-  ctr,
-  ecb,
-  ofb64Gctr,
-  ofb64,
-  sic,
-  gcm,
-}
+enum AESMode { cbc, cfb64, ctr, ecb, ofb64Gctr, ofb64, sic, gcm }
 
 const Map<AESMode, String> _modes = {
   AESMode.cbc: 'CBC',
@@ -139,7 +121,4 @@ const Map<AESMode, String> _modes = {
   AESMode.gcm: 'GCM',
 };
 
-const List<AESMode> _streamable = [
-  AESMode.sic,
-  AESMode.ctr,
-];
+const List<AESMode> _streamable = [AESMode.sic, AESMode.ctr];

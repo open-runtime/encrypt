@@ -165,7 +165,7 @@ void main() {
         RSA(
           publicKey: publicKey,
           privateKey: privateKey,
-          encoding: RSAEncoding.OAEP,
+          encoding: RSAEncoding.oaep,
         ),
       );
       final encrypted = encrypter.encrypt(text);
@@ -178,8 +178,8 @@ void main() {
         RSA(
           publicKey: publicKey,
           privateKey: privateKey,
-          encoding: RSAEncoding.OAEP,
-          digest: RSADigest.SHA256,
+          encoding: RSAEncoding.oaep,
+          digest: RSADigest.sha256,
         ),
       );
       final encrypted = encrypter.encrypt(text);
@@ -198,8 +198,8 @@ void main() {
         RSA(
           publicKey: publicKey,
           privateKey: privateKey,
-          encoding: RSAEncoding.OAEP,
-          digest: RSADigest.SHA512,
+          encoding: RSAEncoding.oaep,
+          digest: RSADigest.sha512,
         ),
       );
       final encrypted = encrypter.encrypt(text);

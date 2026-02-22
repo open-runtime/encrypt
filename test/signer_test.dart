@@ -8,7 +8,7 @@ void main() {
     final publicKey = await parseKeyFromFile<RSAPublicKey>('test/public.pem');
     final privateKey =
         await parseKeyFromFile<RSAPrivateKey>('test/private.pem');
-    final signer = Signer(RSASigner(RSASignDigest.SHA256,
+    final signer = Signer(RSASigner(RSASignDigest.sha256,
         publicKey: publicKey, privateKey: privateKey));
 
     final message = 'hello world';

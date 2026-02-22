@@ -1,4 +1,4 @@
-part of encrypt;
+part of '../../encrypt.dart';
 
 /// Wraps the Salsa20 Engine.
 class Salsa20 implements Algorithm {

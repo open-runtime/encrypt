@@ -5,7 +5,7 @@ import 'dart:io';
 /// Autodoc: QUICKSTART.md generator for a Dart source module.
 ///
 /// Usage:
-///   dart run scripts/prompts/autodoc_quickstart_prompt.dart <module_name> <source_dir> [lib_dir]
+///   dart run scripts/prompts/autodoc_quickstart_prompt.dart `<module_name>` `<source_dir>` [lib_dir]
 
 void main(List<String> args) {
   if (args.length < 2) {

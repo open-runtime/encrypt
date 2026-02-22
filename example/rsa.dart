@@ -23,7 +23,7 @@ void main() async {
 
   // OAEP (SHA1)
   encrypter = Encrypter(
-    RSA(publicKey: publicKey, privateKey: privKey, encoding: RSAEncoding.OAEP),
+    RSA(publicKey: publicKey, privateKey: privKey, encoding: RSAEncoding.oaep),
   );
   encrypted = encrypter.encrypt(plainText);
   decrypted = encrypter.decrypt(encrypted);
@@ -39,8 +39,8 @@ void main() async {
     RSA(
       publicKey: publicKey,
       privateKey: privKey,
-      encoding: RSAEncoding.OAEP,
-      digest: RSADigest.SHA256,
+      encoding: RSAEncoding.oaep,
+      digest: RSADigest.sha256,
     )
   );
   encrypted = encrypter.encrypt(plainText);
