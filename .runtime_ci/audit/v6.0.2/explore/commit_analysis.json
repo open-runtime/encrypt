@@ -1,0 +1,21 @@
+{
+  "version": "6.0.2",
+  "previous_version": "v6.0.1",
+  "total_commits": 1,
+  "categories": {
+    "added": [],
+    "changed": [
+      {
+        "description": "Updated CI tooling to v0.11.2 and adjusted CI workflow steps.",
+        "pr": "",
+        "commits": [
+          "0729eae4170ec209b9e1e30dae251164c2843315"
+        ]
+      }
+    ],
+    "deprecated": [],
+    "removed": [],
+    "fixed": [],
+    "security": []
+  }
+}
