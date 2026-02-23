@@ -108,7 +108,21 @@ class AES implements Algorithm {
   }
 }
 
-enum AESMode { cbc, cfb64, ctr, ecb, ofb64Gctr, ofb64, sic, gcm }
+enum AESMode {
+  cbc,
+  cfb64,
+  ctr,
+
+  /// ECB mode encrypts each block independently, leaking plaintext patterns.
+  /// Use [AESMode.gcm] or [AESMode.cbc] instead.
+  @Deprecated('ECB mode is insecure - it leaks plaintext patterns. Use gcm or cbc instead.')
+  ecb,
+
+  ofb64Gctr,
+  ofb64,
+  sic,
+  gcm,
+}
 
 const Map<AESMode, String> _modes = {
   AESMode.cbc: 'CBC',

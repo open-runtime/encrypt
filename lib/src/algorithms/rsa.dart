@@ -120,13 +120,13 @@ class RSASigner extends AbstractRSA implements SignerAlgorithm {
     final expected = _encode(hash);
 
     if (signature0.length == expected.length) {
+      var nonEqual = 0;
+
       for (var i = 0; i < signature0.length; i++) {
-        if (signature0[i] != expected[i]) {
-          return false;
-        }
+        nonEqual |= (signature0[i] ^ expected[i]);
       }
 
-      return true;
+      return nonEqual == 0;
     } else if (signature0.length == expected.length - 2) {
       var sigOffset = signature0.length - hash.length - 2;
       var expectedOffset = expected.length - hash.length - 2;

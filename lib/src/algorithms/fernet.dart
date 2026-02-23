@@ -83,9 +83,23 @@ class Fernet implements Algorithm {
     final digest = data.sublist(length - 32);
     var hmac = Hmac(sha256, _signKey.bytes);
     final digestConverted = hmac.convert(parts).bytes;
-    if (!ListEquality().equals(digest, digestConverted)) {
+    if (!_constantTimeEquals(digest, Uint8List.fromList(digestConverted))) {
       throw StateError('Invalid token');
     }
+  }
+
+  /// Constant-time comparison to prevent timing side-channel attacks.
+  ///
+  /// Unlike [ListEquality.equals], this does not short-circuit on the first
+  /// byte difference. Instead it XOR-accumulates all differences so the
+  /// execution time is independent of which bytes differ.
+  static bool _constantTimeEquals(List<int> a, List<int> b) {
+    if (a.length != b.length) return false;
+    var result = 0;
+    for (var i = 0; i < a.length; i++) {
+      result |= a[i] ^ b[i];
+    }
+    return result == 0;
   }
 
   Uint8List _encryptFromParts(Uint8List bytes, int currentTime, IV iv) {

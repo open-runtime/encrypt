@@ -112,7 +112,12 @@ class Key extends Encrypted {
   /// The key is ALL ZEROS - NOT CRYPTOGRAPHICALLY SECURE!
   Key.allZerosOfLength(super.length) : super.allZerosOfLength();
 
-  Key stretch(int desiredKeyLength, {int iterationCount = 100, Uint8List? salt}) {
+  /// Derives a new key of [desiredKeyLength] bytes using PBKDF2.
+  ///
+  /// The [iterationCount] defaults to 600,000 per OWASP recommendations for
+  /// PBKDF2-HMAC-SHA1. Passing a value below 600,000 is strongly discouraged
+  /// as it weakens resistance to brute-force attacks.
+  Key stretch(int desiredKeyLength, {int iterationCount = 600000, Uint8List? salt}) {
     salt ??= SecureRandom(desiredKeyLength).bytes;
 
     final params = Pbkdf2Parameters(salt, iterationCount, desiredKeyLength);
