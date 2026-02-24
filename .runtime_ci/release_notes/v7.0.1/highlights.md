@@ -1,0 +1,2 @@
+- Fixed an automated release pipeline issue by upgrading the `runtime_ci_tooling` development dependency.
+- Ensured stable CI workflows by preventing failures during `create-release pull --rebase` operations.

@@ -1,0 +1,6 @@
+- **Decision**: patch. The only change is an update to a development dependency (`runtime_ci_tooling`), fixing an issue in the release pipeline. This has no impact on the public API or behavior of the package.
+- **Key Changes**:
+  - `chore(deps)`: Bump `runtime_ci_tooling` from `^0.11.0` to `^0.12.0` in `pubspec.yaml`.
+- **Breaking Changes**: None.
+- **New Features**: None.
+- **References**: commit "chore(deps): bump runtime_ci_tooling to ^0.12.0"

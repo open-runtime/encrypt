@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.0.1] - 2026-02-24
+
+### Changed
+- Bumped runtime_ci_tooling dev dependency to ^0.12.0
+
+### Fixed
+- Fixes create-release pull --rebase failure when previous pipeline steps leave unstaged changes (via runtime_ci_tooling v0.12.1 pickup)
+
 ## [7.0.0] - 2026-02-24
 
 ### Breaking Changes
@@ -275,6 +283,7 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 
 - Refresh dependencies, make sure it works on Dart 2
 
+[7.0.1]: https://github.com/open-runtime/encrypt/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/open-runtime/encrypt/compare/v6.0.2...v7.0.0
 [6.0.2]: https://github.com/open-runtime/encrypt/compare/v6.0.1...v6.0.2
 [6.0.1]: https://github.com/open-runtime/encrypt/compare/v6.0.0...v6.0.1
