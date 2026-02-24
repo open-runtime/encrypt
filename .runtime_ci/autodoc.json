@@ -33,7 +33,8 @@
       "output_path": "doc/algorithms/",
       "generate": [
         "quickstart",
-        "api_reference"
+        "api_reference",
+        "examples"
       ],
       "hash": "0dba7f7c89cfcd489152839da77f2b4608a340643974b1ace257a830e5cba473",
       "last_updated": "2026-02-22T23:43:25.108287Z"

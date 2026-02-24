@@ -628,7 +628,7 @@ jobs:
           retention-days: 1
 
   # ============================================================================
-  # Job 7: Create Release
+  # Job 6: Create Release
   # ============================================================================
   create-release:
     needs: [determine-version, compose-artifacts, release-notes]
@@ -751,7 +751,7 @@ jobs:
             --repo "${{ github.repository }}"
 
   # ============================================================================
-  # Job 8: Post-Release Triage
+  # Job 7: Post-Release Triage
   # ============================================================================
   post-release-triage:
     needs: [determine-version, create-release]
