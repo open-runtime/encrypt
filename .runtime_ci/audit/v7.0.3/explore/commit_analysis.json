@@ -1,0 +1,19 @@
+{
+  "version": "7.0.3",
+  "previous_version": "v7.0.2",
+  "total_commits": 1,
+  "categories": {
+    "added": [],
+    "changed": [
+      {
+        "description": "Updated .gitignore to include .claude/, .dart_tool/, and custom_lint.log entries",
+        "pr": null,
+        "commits": ["292c1e725d7d0a92d3c73292b8f14e167c48a5a2"]
+      }
+    ],
+    "deprecated": [],
+    "removed": [],
+    "fixed": [],
+    "security": []
+  }
+}

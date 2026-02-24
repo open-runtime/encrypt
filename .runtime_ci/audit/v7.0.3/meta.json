@@ -1,0 +1,82 @@
+{
+  "command": "merged-audit",
+  "started_at": "2026-02-24T17:44:52.073794",
+  "merged_from": [
+    {
+      "artifact": "cicd-audit-explore",
+      "command": "explore",
+      "args": [],
+      "started_at": "2026-02-24T17:31:02.322899",
+      "pid": 2627,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-24T17-31-02_2627",
+      "ci": true,
+      "completed_at": "2026-02-24T17:35:04.750416",
+      "duration_seconds": 242,
+      "exit_code": 0,
+      "artifacts": [
+        "explore/prompt.txt",
+        "explore/gemini_response.json",
+        "meta.json"
+      ]
+    },
+    {
+      "artifact": "cicd-audit-release-notes",
+      "command": "release-notes",
+      "args": [],
+      "started_at": "2026-02-24T17:40:34.044956",
+      "pid": 2708,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-24T17-40-34_2708",
+      "ci": true,
+      "completed_at": "2026-02-24T17:44:24.800074",
+      "duration_seconds": 230,
+      "artifacts": [
+        "release-notes/prompt.txt",
+        "release-notes/release_notes.md",
+        "release-notes/gemini_response.json",
+        "meta.json"
+      ]
+    },
+    {
+      "artifact": "cicd-audit-compose",
+      "command": "compose",
+      "args": [],
+      "started_at": "2026-02-24T17:35:59.279363",
+      "pid": 2650,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-24T17-35-59_2650",
+      "ci": true,
+      "completed_at": "2026-02-24T17:38:22.376661",
+      "duration_seconds": 143,
+      "artifacts": [
+        "compose/prompt.txt",
+        "compose/gemini_response.json",
+        "meta.json"
+      ]
+    },
+    {
+      "artifact": "cicd-audit-compose",
+      "command": "documentation",
+      "args": [],
+      "started_at": "2026-02-24T17:38:22.836863",
+      "pid": 4931,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-24T17-38-22_4931",
+      "ci": true
+    }
+  ],
+  "artifact_count": 5,
+  "total_files": 17,
+  "ci": true,
+  "platform": "linux",
+  "dart_version": "3.9.2"
+}
