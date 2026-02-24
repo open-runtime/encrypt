@@ -1,0 +1,4 @@
+- **CRITICAL Security Fixes** — Mitigates timing side-channel attacks in Fernet HMAC verification and RSA signature verification using constant-time comparison.
+- **Enhanced PBKDF2 Defaults** — Drastically improves resistance to brute-force attacks by raising the default `Key.stretch` iterations from 100 to 600,000 to align with OWASP recommendations.
+- **Strict Key/IV Validation** — Prevents cryptographic misuse by strictly enforcing standard key lengths (16, 24, or 32 bytes) and IV lengths (12 bytes for GCM, 16 bytes for others) in AES algorithms.
+- **New Utilities** — Introduces `SecureRandom.base64Url` for convenient and secure URL-safe random string generation.

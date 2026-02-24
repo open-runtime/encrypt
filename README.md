@@ -57,6 +57,8 @@ Current status is:
 
 #### AES
 
+AES requires keys of 16, 24, or 32 bytes in length. Initialization Vectors (IV) must be 12 bytes for GCM mode, and 16 bytes for all other modes.
+
 ```dart
 import 'package:encrypt/encrypt.dart';
 

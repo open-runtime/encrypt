@@ -1,0 +1,20 @@
+{
+  "pull_requests": [
+    {
+      "number": 18,
+      "title": "fix(security): AES key/IV validation, SecureRandom.base64Url, GCM docs + tests",
+      "author": "tsavo-at-pieces",
+      "labels": ["security"],
+      "summary": "Validates AES key and IV lengths and adds SecureRandom.base64Url for URL-safe encoding.",
+      "commits": ["fd6519b0ce2931ed48461f45900d60a02bebf3b0"]
+    },
+    {
+      "number": 16,
+      "title": "fix(security): 4 CRITICAL vulnerability fixes + test update",
+      "author": "tsavo-at-pieces",
+      "labels": ["security"],
+      "summary": "Fixes critical timing attacks in Fernet and RSA, significantly increases the default PBKDF2 iterations, and deprecates the insecure AES ECB mode.",
+      "commits": ["b883ebe95a679598bebe4560a110bd6fd2f9d50a", "ff89d692dba13313cbb11522c3a3fb25d99dca2d"]
+    }
+  ]
+}

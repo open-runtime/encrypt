@@ -1,0 +1,58 @@
+{
+  "version": "7.0.0",
+  "previous_version": "v6.0.2",
+  "total_commits": 4,
+  "categories": {
+    "added": [
+      {
+        "description": "Added base64Url getter to SecureRandom for URL-safe encoding",
+        "pr": "#18",
+        "commits": ["fd6519b0ce2931ed48461f45900d60a02bebf3b0"]
+      },
+      {
+        "description": "Added auto-format job to CI workflow and updated config",
+        "pr": "#16",
+        "commits": ["d7da14ca2ae46035778a88051883f484a2bf9612", "b883ebe95a679598bebe4560a110bd6fd2f9d50a"]
+      }
+    ],
+    "changed": [
+      {
+        "description": "Raised Key.stretch (PBKDF2) default iterations from 100 to 600,000 per OWASP recommendations",
+        "pr": "#16",
+        "commits": ["b883ebe95a679598bebe4560a110bd6fd2f9d50a", "ff89d692dba13313cbb11522c3a3fb25d99dca2d"]
+      },
+      {
+        "description": "Updated runtime_ci_tooling dependency to ^0.11.0",
+        "pr": null,
+        "commits": ["d7da14ca2ae46035778a88051883f484a2bf9612"]
+      }
+    ],
+    "deprecated": [
+      {
+        "description": "Deprecated insecure AES ECB mode that leaks plaintext patterns",
+        "pr": "#16",
+        "commits": ["b883ebe95a679598bebe4560a110bd6fd2f9d50a", "ff89d692dba13313cbb11522c3a3fb25d99dca2d"]
+      }
+    ],
+    "removed": [],
+    "fixed": [
+      {
+        "description": "Validated AES key lengths (16/24/32 bytes) and IV lengths (12 bytes for GCM, 16 for others) to prevent misuse",
+        "pr": "#18",
+        "commits": ["fd6519b0ce2931ed48461f45900d60a02bebf3b0"]
+      }
+    ],
+    "security": [
+      {
+        "description": "Implemented constant-time XOR-accumulation comparison for Fernet HMAC verification to fix timing side-channel attacks",
+        "pr": "#16",
+        "commits": ["b883ebe95a679598bebe4560a110bd6fd2f9d50a", "ff89d692dba13313cbb11522c3a3fb25d99dca2d"]
+      },
+      {
+        "description": "Used constant-time XOR comparison for equal-length RSA signature verification to fix timing side-channel attacks",
+        "pr": "#16",
+        "commits": ["b883ebe95a679598bebe4560a110bd6fd2f9d50a", "ff89d692dba13313cbb11522c3a3fb25d99dca2d"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "has_breaking_changes": true,
+  "changes": [
+    {
+      "description": "PBKDF2 iteration count increased from 100 to 600,000 by default.",
+      "affected_apis": [
+        "Key.stretch"
+      ],
+      "migration_guide": "If your application relies on the previous default of 100 iterations to derive the same key from a password, you must explicitly set `iterationCount: 100` when calling `Key.stretch()`. However, it is strongly recommended to migrate to the new default or higher for security.",
+      "pr": "#16"
+    },
+    {
+      "description": "Strict validation for AES key and IV lengths has been added.",
+      "affected_apis": [
+        "AES()",
+        "AES.encrypt()",
+        "AES.decrypt()"
+      ],
+      "migration_guide": "Ensure your AES keys are exactly 16, 24, or 32 bytes long, and your IVs are 12 bytes for GCM mode and 16 bytes for other modes. Provide valid length keys and IVs to prevent `ArgumentError`.",
+      "pr": "#18"
+    }
+  ]
+}

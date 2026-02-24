@@ -1,0 +1,32 @@
+{
+  "version": "7.0.0",
+  "github_issues": [
+    {
+      "number": 18,
+      "title": "fix(security): AES key/IV validation, SecureRandom.base64Url, GCM docs + tests",
+      "status": "fixed",
+      "confidence": 1.0,
+      "referenced_in": ["release_notes", "changelog"]
+    },
+    {
+      "number": 16,
+      "title": "fix(security): 4 CRITICAL vulnerability fixes",
+      "status": "fixed",
+      "confidence": 1.0,
+      "referenced_in": ["release_notes", "changelog"]
+    }
+  ],
+  "sentry_issues": [],
+  "prs_referenced": [
+    {
+      "number": 16,
+      "title": "fix(security): 4 CRITICAL vulnerability fixes + test update",
+      "author": "tsavo-at-pieces"
+    },
+    {
+      "number": 18,
+      "title": "fix(security): AES key/IV validation, SecureRandom.base64Url, GCM docs + tests",
+      "author": "tsavo-at-pieces"
+    }
+  ]
+}

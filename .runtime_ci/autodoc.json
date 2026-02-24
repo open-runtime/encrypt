@@ -18,8 +18,8 @@
         "api_reference",
         "examples"
       ],
-      "hash": "1d59a2cabaa64b325b82e66981e6e01d965a3d3841880e9d79c0cbcf4e537763",
-      "last_updated": "2026-02-22T23:43:25.100942Z"
+      "hash": "50f5ac650492f16794892b3c4d0104b596688ead0eda5640638c5026f8b043b3",
+      "last_updated": "2026-02-24T00:44:15.116242Z"
     },
     {
       "id": "algorithms",
@@ -36,8 +36,8 @@
         "api_reference",
         "examples"
       ],
-      "hash": "0dba7f7c89cfcd489152839da77f2b4608a340643974b1ace257a830e5cba473",
-      "last_updated": "2026-02-22T23:43:25.108287Z"
+      "hash": "47e55ada716abebf18328728acbce5245ab54a44d29df4a60b9c1ca55b0d60d9",
+      "last_updated": "2026-02-24T00:44:15.124492Z"
     }
   ],
   "templates": {
