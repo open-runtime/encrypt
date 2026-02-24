@@ -1,0 +1,9 @@
+- **Decision**: patch (chore/maintenance changes only).
+- **Key Changes**:
+  - Upgraded `runtime_ci_tooling` dev_dependency from `^0.12.0` to `^0.13.0`.
+  - Updated CI workflows to enable a 6-platform test matrix (`ubuntu-x64`, `ubuntu-arm64`, `macos-arm64`, `macos-x64`, `windows-x64`, `windows-arm64`) using organization-managed runners.
+  - Split `analyze-and-test` into separate `analyze` and `test` jobs in `.github/workflows/ci.yaml`.
+- **Breaking Changes**: None
+- **New Features**: None
+- **References**:
+  - Commit: `chore(ci): upgrade runtime_ci_tooling to v0.13.0, enable 6-platform test matrix`

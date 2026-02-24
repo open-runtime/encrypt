@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.0.4] - 2026-02-24
+
+### Changed
+- Upgraded runtime_ci_tooling to v0.13.0, splitting the CI process into separate analyze and test jobs, and enabling a 6-platform test matrix (ubuntu-x64, ubuntu-arm64, macos-arm64, macos-x64, windows-x64, windows-arm64) using org-managed runners.
+
 ## [7.0.3] - 2026-02-24
 
 ### Changed
@@ -98,7 +103,6 @@ This release focuses on improving developer experience and workflow reliability 
 * update manifest to match latest actual release (5.1.4) ([22f656a](https://github.com/pieces-app/encrypt/commit/22f656a7d7e9301302d10d986734bcb2372b82f2))
 * Use base branch manifest and GitHub releases for previous version detection ([829d65b](https://github.com/pieces-app/encrypt/commit/829d65bfbb68562bf8a9b8ee3bbce68993e7d3ff))
 
-
 ### 📚 Documentation
 
 * Add AI-enhanced release highlights for v5.1.5 ([65e0041](https://github.com/pieces-app/encrypt/commit/65e0041f969b1d5f3f2015047178d6232b803a25))
@@ -108,7 +112,6 @@ This release focuses on improving developer experience and workflow reliability 
 * apply Copilot AI review suggestions to workflows README ([f933a92](https://github.com/pieces-app/encrypt/commit/f933a920c94882c5fcda4c06b1d5749dff48107f))
 * fix Copilot AI review suggestions in workflows README ([547788b](https://github.com/pieces-app/encrypt/commit/547788b27a84176d5ebf191b108ea4dcfbff5fa4))
 * fix Copilot AI review suggestions in workflows README ([a213efc](https://github.com/pieces-app/encrypt/commit/a213efc38e520be6f6b25e4f4ddf5646bcad7775))
-
 
 ### 🔧 Chores
 
@@ -128,13 +131,11 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 
 ## [5.1.4](https://github.com/pieces-app/encrypt/compare/v5.1.3...v5.1.4) (2025-11-30)
 
-
 ### 🐛 Bug Fixes
 
 * resolve dart analyze lint errors ([6b2e2a7](https://github.com/pieces-app/encrypt/commit/6b2e2a79eb86f45b89c206d47225d4bcb60dd1d9))
 
 ## [5.1.3](https://github.com/pieces-app/encrypt/compare/v5.1.2...v5.1.3) (2025-11-30)
-
 
 ### 🐛 Bug Fixes
 
@@ -142,11 +143,9 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 
 ## [5.1.2](https://github.com/pieces-app/encrypt/compare/v5.1.1...v5.1.2) (2025-11-30)
 
-
 ### 🐛 Bug Fixes
 
 * use github.event.pull_request.head.ref instead of github.head_ref ([369e899](https://github.com/pieces-app/encrypt/commit/369e8997889a2ec4c5ab880b4b72ecde07897a07))
-
 
 ### 📚 Documentation
 
@@ -154,13 +153,11 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 
 ## [5.1.1](https://github.com/pieces-app/encrypt/compare/v5.1.0...v5.1.1) (2025-11-30)
 
-
 ### 🔧 Chores
 
 * disable pub.dev publishing ([e364c12](https://github.com/pieces-app/encrypt/commit/e364c128fb447467ed407c8630d72c14f620ab70))
 
 ## [5.1.0](https://github.com/pieces-app/encrypt/compare/v5.0.4...v5.1.0) (2025-11-30)
-
 
 ### ✨ Features
 
@@ -169,17 +166,14 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 * optional padding (default pkcs7) ([3f86652](https://github.com/pieces-app/encrypt/commit/3f8665296bd1d157bce84547e72ae72cc7f7d987))
 * optional padding (default pkcs7) ([6d4c12b](https://github.com/pieces-app/encrypt/commit/6d4c12b528023747aae746b270c703cd05619c79))
 
-
 ### 🐛 Bug Fixes
 
 * 32 ([32d2091](https://github.com/pieces-app/encrypt/commit/32d20914adefa4b45e75948133a6dc5d6f7f3012))
 * Could not parse version "~3.6.2" ([#315](https://github.com/pieces-app/encrypt/issues/315)) ([f92c4f1](https://github.com/pieces-app/encrypt/commit/f92c4f18c5b775a50a949da1e86c2f6e924edd89))
 
-
 ### ♻️ Refactoring
 
 * remove deprecated author attr ([f409383](https://github.com/pieces-app/encrypt/commit/f409383c92892d7302afa52b3d6f860ddca74b5d))
-
 
 ### 🔧 Chores
 
@@ -293,6 +287,7 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 
 - Refresh dependencies, make sure it works on Dart 2
 
+[7.0.4]: https://github.com/open-runtime/encrypt/compare/v7.0.3...v7.0.4
 [7.0.3]: https://github.com/open-runtime/encrypt/compare/v7.0.2...v7.0.3
 [7.0.2]: https://github.com/open-runtime/encrypt/compare/v7.0.1...v7.0.2
 [7.0.1]: https://github.com/open-runtime/encrypt/compare/v7.0.0...v7.0.1
