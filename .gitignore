@@ -11,3 +11,6 @@ pubspec.lock
 # CI/CD local run audit trails
 .cicd_runs/
 .runtime_ci/runs/
+
+# Claude AI session data
+.claude/
