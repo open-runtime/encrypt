@@ -1,0 +1,9 @@
+- **Decision**: patch (chore/maintenance, CI changes)
+- **Key Changes**:
+  - Updated CI tooling (`runtime_ci_tooling`) to `v0.11.2`
+  - Replaced custom test and format runners with raw `dart analyze`, `dart format`, and `dart test`
+  - Added new hooks (`# --- BEGIN USER: ...`) to CI workflows
+- **Breaking Changes**: None
+- **New Features**: None
+- **References**:
+  - Commit `chore(ci): update ci tooling to v0.11.2`

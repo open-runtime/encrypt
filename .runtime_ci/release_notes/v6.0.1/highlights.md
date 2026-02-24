@@ -1,0 +1,3 @@
+- Bumped `runtime_ci_tooling` dev_dependency to `^0.10.0` to maintain consistent workspace-mode dependency resolution.
+- Ensures the package integrates smoothly within the open-runtime workspace infrastructure.
+- Minor maintenance release with no public API changes.

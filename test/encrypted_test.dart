@@ -47,15 +47,25 @@ void main() {
       expect(encrypted.bytes, equals([0, 1, 2]));
     });
 
-    test('Key.strech', () {
+    test('Key.stretch with explicit legacy iteration count', () {
       final desiredLength = 32;
       final salt = Uint8List(16);
       final shortKey = Key.fromUtf8('short');
-      final strechedKey = shortKey.stretch(desiredLength, salt: salt);
+      final stretchedKey = shortKey.stretch(desiredLength, iterationCount: 100, salt: salt);
 
-      expect(strechedKey.bytes.length, equals(desiredLength));
-      expect(strechedKey.base64,
-          equals('ykT8qFmrPp7TJyzY+E2NoBNjfWymzKOs1OCbRsO67fo='));
+      expect(stretchedKey.bytes.length, equals(desiredLength));
+      expect(stretchedKey.base64, equals('ykT8qFmrPp7TJyzY+E2NoBNjfWymzKOs1OCbRsO67fo='));
+    });
+
+    test('Key.stretch uses 600k iterations by default', () {
+      final desiredLength = 32;
+      final salt = Uint8List(16);
+      final shortKey = Key.fromUtf8('short');
+      final stretchedKey = shortKey.stretch(desiredLength, salt: salt);
+
+      expect(stretchedKey.bytes.length, equals(desiredLength));
+      // Default 600k iterations produces a different key than 100 iterations.
+      expect(stretchedKey.base64, isNot(equals('ykT8qFmrPp7TJyzY+E2NoBNjfWymzKOs1OCbRsO67fo=')));
     });
 
     test('Key.length', () {

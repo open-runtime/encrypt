@@ -1,0 +1,3 @@
+- Upgraded CI tooling (`runtime_ci_tooling`) to version `v0.11.2` for improved workflow automation.
+- Transitioned format and test checks to use standard `dart analyze`, `dart format`, and `dart test` commands.
+- Configured dynamic workflow updates to maintain consistency across the project workspace.
