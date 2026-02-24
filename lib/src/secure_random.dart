@@ -12,6 +12,8 @@ class SecureRandom {
 
   String get base64 => convert.base64.encode(_bytes);
 
+  String get base64Url => convert.base64Url.encode(_bytes);
+
   String get utf8 => convert.utf8.decode(_bytes);
 
   int get length => _bytes.length;
