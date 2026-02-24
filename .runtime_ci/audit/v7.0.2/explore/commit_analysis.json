@@ -1,0 +1,19 @@
+{
+  "version": "7.0.2",
+  "previous_version": "v7.0.1",
+  "total_commits": 1,
+  "categories": {
+    "added": [],
+    "changed": [],
+    "deprecated": [],
+    "removed": [],
+    "fixed": [
+      {
+        "description": "Added shell-level org guard and --repo argument to triage.toml to prevent gh commands from resolving to upstream repos in fork contexts",
+        "pr": null,
+        "commits": ["1ed004fa63254e0868119f7b6d2600a59c13415a"]
+      }
+    ],
+    "security": []
+  }
+}

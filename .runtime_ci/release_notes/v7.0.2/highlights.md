@@ -1,0 +1,3 @@
+- **Enhanced Triage Tooling**: Added a shell-level organization guard to the issue triage command to prevent upstream command execution leakage in fork contexts.
+- **Safer GitHub CLI Execution**: Commands executed by the triage tool now explicitly enforce repository context using the `--repo` argument.
+- **Triage Deduplication**: Added logic to review existing issue comments prior to posting, preventing duplicate automated triage responses.
