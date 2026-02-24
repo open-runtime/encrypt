@@ -10,6 +10,12 @@ class AES implements Algorithm {
 
   AES(this.key, {this.mode = AESMode.sic, this.padding = 'PKCS7'})
     : _streamCipher = padding == null && _streamable.contains(mode) ? StreamCipher('AES/${_modes[mode]}') : null {
+    if (key.bytes.length != 16 && key.bytes.length != 24 && key.bytes.length != 32) {
+      throw ArgumentError(
+        'AES key must be 16, 24, or 32 bytes (128, 192, or 256 bits). '
+        'Got ${key.bytes.length} bytes.',
+      );
+    }
     if (mode == AESMode.gcm) {
       _cipher = GCMBlockCipher(AESEngine());
     } else {
@@ -23,6 +29,13 @@ class AES implements Algorithm {
   Encrypted encrypt(Uint8List bytes, {IV? iv, Uint8List? associatedData}) {
     if (mode != AESMode.ecb && iv == null) {
       throw StateError('IV is required.');
+    }
+    if (iv != null) {
+      if (mode == AESMode.gcm && iv.bytes.length != 12) {
+        throw ArgumentError('GCM mode requires a 12-byte IV (96 bits). Got ${iv.bytes.length} bytes.');
+      } else if (mode != AESMode.ecb && mode != AESMode.gcm && iv.bytes.length != 16) {
+        throw ArgumentError('AES ${_modes[mode]} mode requires a 16-byte IV (128 bits). Got ${iv.bytes.length} bytes.');
+      }
     }
 
     if (_streamCipher != null) {
@@ -48,6 +61,13 @@ class AES implements Algorithm {
   Uint8List decrypt(Encrypted encrypted, {IV? iv, Uint8List? associatedData}) {
     if (mode != AESMode.ecb && iv == null) {
       throw StateError('IV is required.');
+    }
+    if (iv != null) {
+      if (mode == AESMode.gcm && iv.bytes.length != 12) {
+        throw ArgumentError('GCM mode requires a 12-byte IV (96 bits). Got ${iv.bytes.length} bytes.');
+      } else if (mode != AESMode.ecb && mode != AESMode.gcm && iv.bytes.length != 16) {
+        throw ArgumentError('AES ${_modes[mode]} mode requires a 16-byte IV (128 bits). Got ${iv.bytes.length} bytes.');
+      }
     }
 
     if (_streamCipher != null) {

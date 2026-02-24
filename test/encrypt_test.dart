@@ -126,6 +126,67 @@ void main() {
     });
   });
 
+  group('AES GCM', () {
+    test('encrypt/decrypt round-trip', () {
+      final encrypter = Encrypter(AES(key, mode: AESMode.gcm));
+      final iv = IV.fromLength(12);
+
+      final encrypted = encrypter.encrypt(text, iv: iv);
+      final decrypted = encrypter.decrypt(encrypted, iv: iv);
+
+      expect(decrypted, equals(text));
+    });
+
+    test('encrypt/decrypt with associated data', () {
+      final encrypter = Encrypter(AES(key, mode: AESMode.gcm));
+      final iv = IV.fromLength(12);
+      final aad = utf8.encode('authenticated-context');
+
+      final encrypted =
+          encrypter.encrypt(text, iv: iv, associatedData: aad);
+      final decrypted =
+          encrypter.decrypt(encrypted, iv: iv, associatedData: aad);
+
+      expect(decrypted, equals(text));
+    });
+
+    test('decrypt fails with wrong associated data', () {
+      final encrypter = Encrypter(AES(key, mode: AESMode.gcm));
+      final iv = IV.fromLength(12);
+      final aad = utf8.encode('correct-context');
+      final wrongAad = utf8.encode('wrong-context');
+
+      final encrypted =
+          encrypter.encrypt(text, iv: iv, associatedData: aad);
+      expect(
+        () => encrypter.decrypt(encrypted, iv: iv, associatedData: wrongAad),
+        throwsA(anything),
+      );
+    });
+
+    test('supports 128, 192, and 256-bit keys', () {
+      for (final keyLen in [16, 24, 32]) {
+        final k = Key.fromLength(keyLen);
+        final encrypter = Encrypter(AES(k, mode: AESMode.gcm));
+        final iv = IV.fromLength(12);
+
+        final encrypted = encrypter.encrypt(text, iv: iv);
+        expect(encrypter.decrypt(encrypted, iv: iv), equals(text));
+      }
+    });
+
+    test('different IVs produce different ciphertexts', () {
+      final encrypter = Encrypter(AES(key, mode: AESMode.gcm));
+      final iv1 = IV.fromLength(12);
+      final iv2 = IV.fromLength(12);
+
+      final e1 = encrypter.encrypt(text, iv: iv1);
+      final e2 = encrypter.encrypt(text, iv: iv2);
+
+      expect(e1.base64, isNot(equals(e2.base64)));
+    });
+  });
+
   group('Salsa20', () {
     const encoded =
         '2FCmbbVYQrbLn8pkyPe4mt0ooqNRA8Dm9EmzZVSWgW+M/6FembxLmVdt9/JJt+NSMnx1hNjuOw==';

@@ -88,7 +88,8 @@ final encrypter = Encrypter(AES(key, mode: AESMode.cbc));
 - CBC `AESMode.cbc`
 - CFB-64 `AESMode.cfb64`
 - CTR `AESMode.ctr`
-- ECB `AESMode.ecb`
+- ECB `AESMode.ecb` *(deprecated — leaks plaintext patterns)*
+- GCM `AESMode.gcm` *(authenticated encryption with associated data)*
 - OFB-64/GCTR `AESMode.ofb64Gctr`
 - OFB-64 `AESMode.ofb64`
 - SIC `AESMode.sic`
