@@ -57,15 +57,19 @@ Current status is:
 
 #### AES
 
-AES requires keys of 16, 24, or 32 bytes in length. Initialization Vectors (IV) must be 12 bytes for GCM mode, and 16 bytes for all other modes.
+AES requires keys of 16, 24, or 32 bytes in length.
+
+- Use a 16-byte IV for CBC/CTR/CFB/SIC/OFB modes.
+- Use a 12-byte IV for GCM mode.
+- `IV.fromLength()` and `IV.fromSecureRandom()` generate fresh random bytes on each call. You must decrypt with the same IV value used for encryption.
 
 ```dart
 import 'package:encrypt/encrypt.dart';
 
 void main() {
   final plainText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
-  final key = Key.fromUtf8('my 32 length key................');
-  final iv = IV.fromLength(16);
+  final key = Key.fromSecureRandom(32);
+  final iv = IV.fromSecureRandom(16);
 
   final encrypter = Encrypter(AES(key));
 
@@ -74,6 +78,28 @@ void main() {
 
   print(decrypted); // Lorem ipsum dolor sit amet, consectetur adipiscing elit
   print(encrypted.base64); // R4PxiU3h8YoIRqVowBXm36ZcCeNeZ4s1OvVBTfFlZRdmohQqOpPQqD1YecJeZMAop/hZ4OxqgC1WtwvX/hP9mw==
+}
+```
+
+##### Persist IV with ciphertext (important)
+
+```dart
+import 'package:encrypt/encrypt.dart';
+
+void main() {
+  final key = Key.fromSecureRandom(32);
+  final iv = IV.fromSecureRandom(16);
+  final encrypter = Encrypter(AES(key, mode: AESMode.cbc));
+
+  final encrypted = encrypter.encrypt('sensitive payload', iv: iv);
+  final payload = '${iv.base64}:${encrypted.base64}';
+
+  final parts = payload.split(':');
+  final ivForDecrypt = IV.fromBase64(parts[0]);
+  final cipherForDecrypt = Encrypted.fromBase64(parts[1]);
+  final decrypted = encrypter.decrypt(cipherForDecrypt, iv: ivForDecrypt);
+
+  print(decrypted); // sensitive payload
 }
 ```
 
@@ -96,6 +122,25 @@ final encrypter = Encrypter(AES(key, mode: AESMode.cbc));
 - OFB-64 `AESMode.ofb64`
 - SIC `AESMode.sic`
 
+GCM usage example (12-byte IV):
+
+```dart
+import 'dart:convert';
+import 'package:encrypt/encrypt.dart';
+
+void main() {
+  final key = Key.fromSecureRandom(32);
+  final iv = IV.fromSecureRandom(12);
+  final aad = utf8.encode('context');
+  final encrypter = Encrypter(AES(key, mode: AESMode.gcm));
+
+  final encrypted = encrypter.encrypt('hello', iv: iv, associatedData: aad);
+  final decrypted = encrypter.decrypt(encrypted, iv: iv, associatedData: aad);
+
+  print(decrypted); // hello
+}
+```
+
 ##### No/zero padding
 
 To remove padding, pass `null` to the `padding` named parameter on the constructor:
@@ -111,8 +156,8 @@ import 'package:encrypt/encrypt.dart';
 
 void main() {
   final plainText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
-  final key = Key.fromLength(32);
-  final iv = IV.fromLength(8);
+  final key = Key.fromSecureRandom(32);
+  final iv = IV.fromSecureRandom(8);
   final encrypter = Encrypter(Salsa20(key));
 
   final encrypted = encrypter.encrypt(plainText, iv: iv);
@@ -152,11 +197,11 @@ void main() {
 #### RSA
 
 ```dart
-import 'dart:io';
 import 'package:encrypt/encrypt.dart';
+import 'package:encrypt/encrypt_io.dart';
 import 'package:pointycastle/asymmetric/api.dart';
 
-void main() {
+Future<void> main() async {
   final publicKey = await parseKeyFromFile<RSAPublicKey>('test/public.pem');
   final privKey = await parseKeyFromFile<RSAPrivateKey>('test/private.pem');
 
@@ -171,15 +216,36 @@ void main() {
 }
 ```
 
+`RSAKeyParser` is provided by `package:encrypt/encrypt.dart` (not by PointyCastle).  
+If your private key PEM is encrypted with a passphrase (`Proc-Type: 4,ENCRYPTED`), decrypt it first before parsing.
+
 ### Signature and verification
 
 #### RSA
 
 ```dart
+import 'package:encrypt/encrypt.dart';
+import 'package:encrypt/encrypt_io.dart';
+import 'package:pointycastle/asymmetric/api.dart';
+
+Future<void> main() async {
  final publicKey = await parseKeyFromFile<RSAPublicKey>('test/public.pem');
  final privateKey = await parseKeyFromFile<RSAPrivateKey>('test/private.pem');
- final signer = Signer(RSASigner(RSASignDigest.sha256, publicKey: publicKey, privateKey: privateKey));
+ final signer = Signer(
+   RSASigner(
+     RSASignDigest.sha256,
+     publicKey: publicKey,
+     privateKey: privateKey,
+   ),
+ );
 
  print(signer.sign('hello world').base64);
  print(signer.verify64('hello world', 'jfMhNM2v6hauQr6w3ji0xNOxGInHbeIH3DHlpf2W3vmSMyAuwGHG0KLcunggG4XtZrZPAib7oHaKEAdkHaSIGXAtEqaAvocq138oJ7BEznA4KVYuMcW9c8bRy5E4tUpikTpoO+okHdHr5YLc9y908CAQBVsfhbt0W9NClvDWegs='));
+}
 ```
+
+## Platform and compliance notes
+
+- Random key/IV generation in this package uses Dart `Random.secure()` via `SecureRandom`.
+- This is a pure Dart package; it does not bundle native iOS binaries. If your app targets App Store distribution, privacy manifest declarations are owned by the app and its shipped SDKs.
+- Export/compliance requirements for encryption are app- and jurisdiction-specific; verify your own distribution obligations.

@@ -206,14 +206,37 @@ class RSAKeyParser {
     }
 
     if (header == '-----BEGIN RSA PRIVATE KEY-----') {
+      _throwIfEncryptedPemPrivateKey(rows);
       return _parsePrivate(_parseSequence(rows));
     }
 
     if (header == '-----BEGIN PRIVATE KEY-----') {
+      _throwIfEncryptedPemPrivateKey(rows);
       return _parsePrivate(_pkcs8PrivateSequence(_parseSequence(rows)));
     }
 
+    if (header == '-----BEGIN ENCRYPTED PRIVATE KEY-----') {
+      _throwEncryptedPrivateKeyFormat();
+    }
+
     throw FormatException('Unable to parse key, invalid format.', header);
+  }
+
+  void _throwIfEncryptedPemPrivateKey(List<String> rows) {
+    final isEncrypted = rows.any((row) {
+      final trimmed = row.trim();
+      return trimmed.startsWith('Proc-Type: 4,ENCRYPTED') || trimmed.startsWith('DEK-Info:');
+    });
+    if (isEncrypted) {
+      _throwEncryptedPrivateKeyFormat();
+    }
+  }
+
+  Never _throwEncryptedPrivateKeyFormat() {
+    throw const FormatException(
+      'Encrypted PEM private keys are not supported. Decrypt the private key '
+      'to an unencrypted PKCS#1 or PKCS#8 PEM before parsing.',
+    );
   }
 
   RSAAsymmetricKey _parsePublic(ASN1Sequence sequence) {

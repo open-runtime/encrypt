@@ -8,7 +8,8 @@ void main() {
   final messageAuthenticationCode = 'flutter is awesome';
 
   final key = Key.fromSecureRandom(32);
-  final iv = IV.fromSecureRandom(16);
+  // GCM requires a 12-byte IV (96-bit nonce).
+  final iv = IV.fromSecureRandom(12);
   final macValue = Uint8List.fromList(utf8.encode(messageAuthenticationCode));
 
   final encrypter = Encrypter(AES(key, mode: AESMode.gcm));

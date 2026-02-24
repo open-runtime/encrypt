@@ -11,18 +11,21 @@ void main() {
   final key = Key.fromUtf8('my32lengthsupersecretnooneknows1');
 
   group('Fernet', () {
-    final currentDateTime =
-        DateTime.fromMillisecondsSinceEpoch(1565106118 * 1000);
+    final currentDateTime = DateTime.fromMillisecondsSinceEpoch(
+      1565106118 * 1000,
+    );
 
     final signingKey = Key.fromUtf8('my16signingkey!!');
     final encryptionKey = Key.fromUtf8('16bytesencrypkey');
-    final b64Key = base64Url
-        .encode(signingKey.bytes.toList()..addAll(encryptionKey.bytes));
+    final b64Key = base64Url.encode(
+      signingKey.bytes.toList()..addAll(encryptionKey.bytes),
+    );
     final key = Key.fromBase64(b64Key);
     final fernet = Fernet(key, clock: Clock.fixed(currentDateTime));
     final encrypter = Encrypter(fernet);
     final encrypted = Encrypted.fromBase64(
-        'gAAAAABdSZ/GAAAAAAAAAAAAAAAAAAAAACxNe+/PVLJMTKmBdPrlHat3Bj32TYdt1EKCz2jlJykTrwtMgSuZdLGXAIkmResqHLA5g0k7kzOCdHe02noK7YmV75oA2sLjSTE1zao/jtEdEB/aebAOYKQW8ZEm33oyXA==');
+      'gAAAAABdSZ/GAAAAAAAAAAAAAAAAAAAAACxNe+/PVLJMTKmBdPrlHat3Bj32TYdt1EKCz2jlJykTrwtMgSuZdLGXAIkmResqHLA5g0k7kzOCdHe02noK7YmV75oA2sLjSTE1zao/jtEdEB/aebAOYKQW8ZEm33oyXA==',
+    );
     final iv = IV.allZerosOfLength(16);
 
     test('encrypt', () {
@@ -59,13 +62,17 @@ void main() {
         final encrypted = Encrypted(base64.decode(encoded));
 
         test('encrypt', () {
-          expect(encrypter.encrypt(text, iv: IV.allZerosOfLength(16)),
-              equals(encrypted));
+          expect(
+            encrypter.encrypt(text, iv: IV.allZerosOfLength(16)),
+            equals(encrypted),
+          );
         });
 
         test('decrypt', () {
-          expect(encrypter.decrypt(encrypted, iv: IV.allZerosOfLength(16)),
-              equals(text));
+          expect(
+            encrypter.decrypt(encrypted, iv: IV.allZerosOfLength(16)),
+            equals(text),
+          );
         });
       });
     });
@@ -90,13 +97,16 @@ void main() {
 
         test('encrypt', () {
           expect(
-              encrypter.encrypt(text.padRight(64), iv: IV.allZerosOfLength(16)),
-              equals(encrypted));
+            encrypter.encrypt(text.padRight(64), iv: IV.allZerosOfLength(16)),
+            equals(encrypted),
+          );
         });
 
         test('decrypt', () {
-          expect(encrypter.decrypt(encrypted, iv: IV.allZerosOfLength(16)),
-              equals(text.padRight(64)));
+          expect(
+            encrypter.decrypt(encrypted, iv: IV.allZerosOfLength(16)),
+            equals(text.padRight(64)),
+          );
         });
       });
     });
@@ -113,13 +123,17 @@ void main() {
           final encrypted = Encrypted(base64.decode(encoded));
 
           test('encrypt', () {
-            expect(encrypter.encrypt(text, iv: IV.allZerosOfLength(16)),
-                equals(encrypted));
+            expect(
+              encrypter.encrypt(text, iv: IV.allZerosOfLength(16)),
+              equals(encrypted),
+            );
           });
 
           test('decrypt', () {
-            expect(encrypter.decrypt(encrypted, iv: IV.allZerosOfLength(16)),
-                equals(text));
+            expect(
+              encrypter.decrypt(encrypted, iv: IV.allZerosOfLength(16)),
+              equals(text),
+            );
           });
         });
       });
@@ -142,10 +156,12 @@ void main() {
       final iv = IV.fromLength(12);
       final aad = utf8.encode('authenticated-context');
 
-      final encrypted =
-          encrypter.encrypt(text, iv: iv, associatedData: aad);
-      final decrypted =
-          encrypter.decrypt(encrypted, iv: iv, associatedData: aad);
+      final encrypted = encrypter.encrypt(text, iv: iv, associatedData: aad);
+      final decrypted = encrypter.decrypt(
+        encrypted,
+        iv: iv,
+        associatedData: aad,
+      );
 
       expect(decrypted, equals(text));
     });
@@ -156,8 +172,7 @@ void main() {
       final aad = utf8.encode('correct-context');
       final wrongAad = utf8.encode('wrong-context');
 
-      final encrypted =
-          encrypter.encrypt(text, iv: iv, associatedData: aad);
+      final encrypted = encrypter.encrypt(text, iv: iv, associatedData: aad);
       expect(
         () => encrypter.decrypt(encrypted, iv: iv, associatedData: wrongAad),
         throwsA(anything),
@@ -195,22 +210,74 @@ void main() {
     final encrypted = Encrypted(base64.decode(encoded));
 
     test(
-        'encrypt',
-        () => expect(encrypter.encrypt(text, iv: IV.allZerosOfLength(8)),
-            equals(encrypted)));
+      'encrypt',
+      () => expect(
+        encrypter.encrypt(text, iv: IV.allZerosOfLength(8)),
+        equals(encrypted),
+      ),
+    );
 
     test(
-        'decrypt',
-        () => expect(encrypter.decrypt(encrypted, iv: IV.allZerosOfLength(8)),
-            equals(text)));
+      'decrypt',
+      () => expect(
+        encrypter.decrypt(encrypted, iv: IV.allZerosOfLength(8)),
+        equals(text),
+      ),
+    );
   });
 
   group('RSA', () {
     final parser = RSAKeyParser();
-    final RSAPublicKey publicKey = parser
-        .parse(File('test/public.pem').readAsStringSync()) as RSAPublicKey;
-    final RSAPrivateKey privateKey = parser
-        .parse(File('test/private.pem').readAsStringSync()) as RSAPrivateKey;
+    final RSAPublicKey publicKey =
+        parser.parse(File('test/public.pem').readAsStringSync())
+            as RSAPublicKey;
+    final RSAPrivateKey privateKey =
+        parser.parse(File('test/private.pem').readAsStringSync())
+            as RSAPrivateKey;
+
+    test(
+      'throws actionable error for passphrase-encrypted PEM private key',
+      () {
+        const encryptedPrivateKeyPem = '''
+-----BEGIN RSA PRIVATE KEY-----
+Proc-Type: 4,ENCRYPTED
+DEK-Info: AES-256-CBC,00112233445566778899AABBCCDDEEFF
+
+AA==
+-----END RSA PRIVATE KEY-----
+''';
+
+        expect(
+          () => parser.parse(encryptedPrivateKeyPem),
+          throwsA(
+            isA<FormatException>().having(
+              (error) => error.message,
+              'message',
+              contains('Encrypted PEM private keys are not supported'),
+            ),
+          ),
+        );
+      },
+    );
+
+    test('throws actionable error for encrypted PKCS#8 private key', () {
+      const encryptedPkcs8Pem = '''
+-----BEGIN ENCRYPTED PRIVATE KEY-----
+AA==
+-----END ENCRYPTED PRIVATE KEY-----
+''';
+
+      expect(
+        () => parser.parse(encryptedPkcs8Pem),
+        throwsA(
+          isA<FormatException>().having(
+            (error) => error.message,
+            'message',
+            contains('Encrypted PEM private keys are not supported'),
+          ),
+        ),
+      );
+    });
 
     test('encrypt/decrypt PKCS1', () {
       final encrypter = Encrypter(
