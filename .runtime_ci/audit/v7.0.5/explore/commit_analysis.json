@@ -1,0 +1,47 @@
+{
+  "version": "7.0.5",
+  "previous_version": "v7.0.4",
+  "total_commits": 1,
+  "categories": {
+    "added": [
+      {
+        "description": "Actionable error messages when attempting to parse passphrase-encrypted PEM private keys",
+        "pr": null,
+        "commits": ["b6287988b06aed88a72e4a4d508aa4f52f3e9109"]
+      },
+      {
+        "description": "Extensive README updates covering secure random IVs, IV persistence, GCM mode, and platform compliance notes",
+        "pr": null,
+        "commits": ["b6287988b06aed88a72e4a4d508aa4f52f3e9109"]
+      },
+      {
+        "description": "Battle tests for CBC IV persistence and GCM IV enforcement",
+        "pr": null,
+        "commits": ["b6287988b06aed88a72e4a4d508aa4f52f3e9109"]
+      }
+    ],
+    "changed": [
+      {
+        "description": "Applied dart format with 120 line length across modified files",
+        "pr": null,
+        "commits": ["b6287988b06aed88a72e4a4d508aa4f52f3e9109"]
+      }
+    ],
+    "deprecated": [],
+    "removed": [],
+    "fixed": [
+      {
+        "description": "Fix AES-GCM example to correctly use a 12-byte IV instead of 16-byte",
+        "pr": null,
+        "commits": ["b6287988b06aed88a72e4a4d508aa4f52f3e9109"]
+      }
+    ],
+    "security": [
+      {
+        "description": "Enforce correct IV usage in GCM examples and clarify IV persistence in documentation to prevent nonce-reuse vulnerabilities",
+        "pr": null,
+        "commits": ["b6287988b06aed88a72e4a4d508aa4f52f3e9109"]
+      }
+    ]
+  }
+}

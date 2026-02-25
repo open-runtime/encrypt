@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.0.5] - 2026-02-24
+
+### Added
+- Added actionable error messages when attempting to parse passphrase-encrypted PEM private keys
+- Added extensive README updates covering secure random IVs, IV persistence, GCM mode, and platform compliance notes
+- Added battle tests for CBC IV persistence and GCM IV enforcement
+
+### Changed
+- Applied dart format with 120 line length across modified files
+
+### Fixed
+- Fixed AES-GCM example to correctly use a 12-byte IV instead of 16-byte
+
+### Security
+- Enforced correct IV usage in GCM examples and clarified IV persistence in documentation to prevent nonce-reuse vulnerabilities
+
 ## [7.0.4] - 2026-02-24
 
 ### Changed
@@ -287,6 +303,7 @@ This release enhances developer experience with comprehensive CI/CD workflows do
 
 - Refresh dependencies, make sure it works on Dart 2
 
+[7.0.5]: https://github.com/open-runtime/encrypt/compare/v7.0.4...v7.0.5
 [7.0.4]: https://github.com/open-runtime/encrypt/compare/v7.0.3...v7.0.4
 [7.0.3]: https://github.com/open-runtime/encrypt/compare/v7.0.2...v7.0.3
 [7.0.2]: https://github.com/open-runtime/encrypt/compare/v7.0.1...v7.0.2

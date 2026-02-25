@@ -1,0 +1,82 @@
+{
+  "command": "merged-audit",
+  "started_at": "2026-02-25T00:13:52.882399",
+  "merged_from": [
+    {
+      "artifact": "cicd-audit-explore",
+      "command": "explore",
+      "args": [],
+      "started_at": "2026-02-24T23:51:40.251800",
+      "pid": 2573,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-24T23-51-40_2573",
+      "ci": true,
+      "completed_at": "2026-02-24T23:57:14.280197",
+      "duration_seconds": 334,
+      "exit_code": 0,
+      "artifacts": [
+        "explore/prompt.txt",
+        "explore/gemini_response.json",
+        "meta.json"
+      ]
+    },
+    {
+      "artifact": "cicd-audit-release-notes",
+      "command": "release-notes",
+      "args": [],
+      "started_at": "2026-02-25T00:11:45.185543",
+      "pid": 2725,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-25T00-11-45_2725",
+      "ci": true,
+      "completed_at": "2026-02-25T00:13:30.193731",
+      "duration_seconds": 105,
+      "artifacts": [
+        "release-notes/prompt.txt",
+        "release-notes/release_notes.md",
+        "release-notes/gemini_response.json",
+        "meta.json"
+      ]
+    },
+    {
+      "artifact": "cicd-audit-compose",
+      "command": "documentation",
+      "args": [],
+      "started_at": "2026-02-25T00:03:11.173540",
+      "pid": 5017,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-25T00-03-11_5017",
+      "ci": true
+    },
+    {
+      "artifact": "cicd-audit-compose",
+      "command": "compose",
+      "args": [],
+      "started_at": "2026-02-24T23:58:15.808788",
+      "pid": 2663,
+      "platform": "linux",
+      "dart_version": "3.9.2",
+      "repo_root": "/home/runner/work/encrypt/encrypt",
+      "run_dir": "/home/runner/work/encrypt/encrypt/.runtime_ci/runs/run_2026-02-24T23-58-15_2663",
+      "ci": true,
+      "completed_at": "2026-02-25T00:03:10.754917",
+      "duration_seconds": 294,
+      "artifacts": [
+        "compose/prompt.txt",
+        "compose/gemini_response.json",
+        "meta.json"
+      ]
+    }
+  ],
+  "artifact_count": 5,
+  "total_files": 17,
+  "ci": true,
+  "platform": "linux",
+  "dart_version": "3.9.2"
+}
